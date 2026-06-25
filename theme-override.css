@@ -1,0 +1,636 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
+
+/* ═══════════════════════════════════════════════════════════
+   COMPLETE VISUAL REDESIGN — Red / Dark Fire
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── 1. CSS Variables ──────────────────────────────────────── */
+:root {
+  --app-font-sans: 'Outfit', 'Inter', sans-serif;
+  --radius: 1rem;
+  --background: 0 60% 4%;
+  --foreground: 0 10% 97%;
+  --border: 0 60% 14%;
+  --input: 0 60% 16%;
+  --ring: 0 100% 60%;
+  --card: 0 55% 6%;
+  --card-foreground: 0 10% 97%;
+  --popover: 0 55% 5%;
+  --popover-foreground: 0 10% 97%;
+  --primary: 0 100% 60%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 0 55% 10%;
+  --secondary-foreground: 0 10% 90%;
+  --muted: 0 55% 8%;
+  --muted-foreground: 0 25% 52%;
+  --accent: 0 70% 14%;
+  --accent-foreground: 0 10% 97%;
+  --destructive: 0 100% 45%;
+  --destructive-foreground: 0 0% 100%;
+}
+
+/* ── 2. Override ALL Tailwind blues → deep red ─────────────── */
+:root, :host {
+  --color-red-50:  oklch(97%  0.01  15);
+  --color-red-300: oklch(76%  0.13  15);
+  --color-red-400: oklch(65%  0.19  15);
+  --color-red-500: oklch(57%  0.23  15);
+  --color-red-600: oklch(51%  0.24  15);
+  --color-red-800: oklch(37%  0.16  15);
+}
+
+/* ── 3. Global Base ────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Outfit', 'Inter', sans-serif !important;
+  background-color: #130404 !important;
+  background-image:
+    radial-gradient(ellipse 100% 60% at 50% -5%,  rgba(220,38,38,0.18)  0%, transparent 70%),
+    radial-gradient(ellipse 60%  60% at 90% 100%, rgba(185,28,28,0.10)  0%, transparent 70%),
+    radial-gradient(ellipse 40%  40% at 10% 80%,  rgba(239,68,68,0.07) 0%, transparent 60%) !important;
+  min-height: 100vh;
+}
+
+/* Subtle grid overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(239,68,68,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(239,68,68,0.04) 1px, transparent 1px);
+  background-size: 52px 52px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── 4. Typography ─────────────────────────────────────────── */
+body, button, input, textarea, select {
+  font-family: 'Outfit', 'Inter', sans-serif !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Outfit', sans-serif !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.03em !important;
+}
+
+.font-black { font-weight: 900 !important; }
+.font-bold   { font-weight: 700 !important; }
+.font-semibold { font-weight: 600 !important; }
+.tracking-tight { letter-spacing: -0.025em !important; }
+
+/* ── 5. Ambient glow blobs ─────────────────────────────────── */
+.blur-3xl {
+  filter: blur(90px) !important;
+  opacity: 0.55 !important;
+  mix-blend-mode: screen !important;
+}
+
+/* ── 6. Header ─────────────────────────────────────────────── */
+.sticky.top-0,
+header {
+  background: rgba(19, 4, 4, 0.80) !important;
+  border-bottom: 1px solid rgba(239, 68, 68, 0.14) !important;
+  box-shadow:
+    0 1px 0 rgba(239,68,68,0.08),
+    0 4px 40px rgba(19,4,4,0.8) !important;
+  backdrop-filter: blur(28px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(160%) !important;
+}
+
+/* Header logo */
+.w-7.h-7.rounded-lg,
+.w-7.h-7.rounded-lg.bg-red-600 {
+  background: linear-gradient(135deg, #b91c1c 0%, #ef4444 100%) !important;
+  box-shadow: 0 0 20px rgba(239,68,68,0.55), 0 0 0 1px rgba(239,68,68,0.3) !important;
+}
+
+/* Brand name */
+.font-bold.text-base.tracking-tight.text-white {
+  font-size: 1.05rem !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.02em !important;
+  background: linear-gradient(90deg, #fff 40%, rgba(252,165,165,0.9) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── 7. Hero section ───────────────────────────────────────── */
+.relative.z-10.flex-1 {
+  position: relative;
+  z-index: 1 !important;
+}
+
+/* Welcome badge */
+[class*="rounded-full"][class*="border"][class*="bg-"] {
+  background: rgba(220,38,38,0.12) !important;
+  border-color: rgba(239,68,68,0.28) !important;
+  box-shadow: 0 0 12px rgba(239,68,68,0.1) !important;
+}
+
+/* Live dot */
+[class*="rounded-full"][class*="bg-blue"],
+[class*="rounded-full"][class*="bg-primary"] {
+  background: #ef4444 !important;
+  box-shadow: 0 0 8px rgba(239,68,68,0.8) !important;
+}
+
+/* "Condo" accent text */
+.text-blue-400, .text-blue-500, .text-primary {
+  color: #f87171 !important;
+  text-shadow: 0 0 30px rgba(248,113,113,0.4);
+}
+
+/* ── 8. Section heading ────────────────────────────────────── */
+.mb-16 {
+  margin-bottom: 4rem !important;
+}
+
+.text-xl.font-bold.text-white,
+.text-2xl.font-black,
+h2 {
+  background: linear-gradient(90deg, #fff 0%, rgba(252,165,165,0.85) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── 9. Game list cards ────────────────────────────────────── */
+.w-full.flex.items-center.gap-4.px-5.py-4.rounded-2xl {
+  background: linear-gradient(135deg, rgba(40,8,8,0.9) 0%, rgba(28,4,4,0.9) 100%) !important;
+  border: 1px solid rgba(239,68,68,0.12) !important;
+  border-radius: 1.25rem !important;
+  box-shadow:
+    0 4px 24px rgba(0,0,0,0.5),
+    inset 0 1px 0 rgba(255,255,255,0.04),
+    inset 0 0 0 1px rgba(239,68,68,0.04) !important;
+  backdrop-filter: blur(16px) !important;
+  transition: all 0.3s cubic-bezier(0.4,0,0.2,1) !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.w-full.flex.items-center.gap-4.px-5.py-4.rounded-2xl::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 15%; bottom: 15%;
+  width: 2px;
+  background: linear-gradient(180deg, transparent, #ef4444, transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 9999px;
+}
+
+.w-full.flex.items-center.gap-4.px-5.py-4.rounded-2xl:hover {
+  background: linear-gradient(135deg, rgba(60,12,12,0.95) 0%, rgba(44,8,8,0.95) 100%) !important;
+  border-color: rgba(239,68,68,0.35) !important;
+  box-shadow:
+    0 0 0 1px rgba(239,68,68,0.15),
+    0 8px 40px rgba(239,68,68,0.12),
+    0 4px 24px rgba(0,0,0,0.6),
+    inset 0 1px 0 rgba(255,255,255,0.07) !important;
+  transform: translateY(-2px) !important;
+}
+
+.w-full.flex.items-center.gap-4.px-5.py-4.rounded-2xl:hover::before {
+  opacity: 1;
+}
+
+/* Card icon container */
+.w-10.h-10.rounded-xl,
+.w-12.h-12.rounded-xl {
+  background: linear-gradient(135deg, #b91c1c, #dc2626) !important;
+  box-shadow: 0 0 20px rgba(185,28,28,0.4) !important;
+}
+
+/* Card game name */
+.text-\[15px\].font-semibold.text-white,
+[class*="text-white"][class*="group-hover"] {
+  font-weight: 700 !important;
+  letter-spacing: -0.01em !important;
+}
+
+/* Tag badges */
+[class*="bg-blue"][class*="text-blue"],
+[class*="rounded"][class*="text-xs"][class*="font-semibold"] {
+  border-radius: 0.5rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.03em !important;
+  text-transform: uppercase !important;
+  font-size: 0.65rem !important;
+}
+
+/* ── 10. Modal ─────────────────────────────────────────────── */
+.absolute.inset-0.bg-black\/60,
+[class*="bg-black/60"] {
+  background: rgba(19, 4, 4, 0.82) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+}
+
+.relative.w-full.max-w-md.rounded-2xl {
+  background: linear-gradient(180deg, rgba(32,6,6,0.98) 0%, rgba(22,4,4,0.98) 100%) !important;
+  border: 1px solid rgba(239,68,68,0.2) !important;
+  border-radius: 1.5rem !important;
+  box-shadow:
+    0 0 0 1px rgba(239,68,68,0.08),
+    0 40px 80px rgba(0,0,0,0.8),
+    0 0 100px rgba(185,28,28,0.08),
+    inset 0 1px 0 rgba(255,255,255,0.05) !important;
+  backdrop-filter: blur(40px) !important;
+  overflow: hidden !important;
+}
+
+.relative.w-full.max-w-md.rounded-2xl::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 20%; right: 20%; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(248,113,113,0.6), transparent);
+  z-index: 1;
+}
+
+/* Modal banner */
+.relative.h-36.overflow-hidden.bg-muted {
+  background: linear-gradient(180deg, #2a0808 0%, #1a0404 100%) !important;
+}
+
+/* Modal large icon */
+.w-14.h-14.rounded-2xl,
+.w-14.h-14.rounded-2xl.bg-red-600 {
+  background: linear-gradient(135deg, #b91c1c 0%, #ef4444 100%) !important;
+  box-shadow:
+    0 0 40px rgba(239,68,68,0.5),
+    0 0 80px rgba(239,68,68,0.15),
+    0 8px 16px rgba(0,0,0,0.5) !important;
+}
+
+/* Modal close button */
+.absolute.top-3.right-3.w-8.h-8.rounded-lg {
+  background: rgba(185,28,28,0.12) !important;
+  border: 1px solid rgba(239,68,68,0.2) !important;
+  transition: all 0.2s ease !important;
+}
+.absolute.top-3.right-3.w-8.h-8.rounded-lg:hover {
+  background: rgba(239,68,68,0.2) !important;
+  border-color: rgba(239,68,68,0.4) !important;
+  box-shadow: 0 0 12px rgba(239,68,68,0.2) !important;
+}
+
+/* Info sections inside modal */
+.mt-4.rounded-xl.border.border-border.bg-background\/60.p-4,
+.mt-4.rounded-xl.border.border-border.bg-background\/60.p-3,
+.space-y-3 > * {
+  background: rgba(185,28,28,0.05) !important;
+  border: 1px solid rgba(239,68,68,0.12) !important;
+  border-radius: 1rem !important;
+}
+
+/* Token text */
+.flex-1.font-mono.text-xs.text-green-400 {
+  color: #fca5a5 !important;
+  font-size: 0.7rem !important;
+}
+
+/* Copy button */
+.flex-shrink-0.w-8.h-8.rounded-lg.bg-secondary,
+.flex-shrink-0.w-8.h-8.rounded-lg.hover\:bg-muted {
+  background: rgba(185,28,28,0.1) !important;
+  border: 1px solid rgba(239,68,68,0.18) !important;
+}
+.flex-shrink-0.w-8.h-8.rounded-lg.bg-secondary:hover {
+  background: rgba(239,68,68,0.2) !important;
+}
+
+/* Small icon wrapper */
+.w-6.h-6.rounded-md {
+  background: rgba(239,68,68,0.14) !important;
+}
+
+/* ── 11. Buttons ───────────────────────────────────────────── */
+
+/* Primary button */
+.w-full.flex.items-center.justify-center.gap-2.py-2\.5.rounded-xl.bg-red-600,
+[class*="bg-red-600"][class*="rounded-xl"] {
+  background: linear-gradient(135deg, #b91c1c 0%, #ef4444 60%, #dc2626 100%) !important;
+  border: none !important;
+  border-radius: 0.9rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.01em !important;
+  box-shadow:
+    0 0 0 1px rgba(239,68,68,0.3),
+    0 4px 20px rgba(185,28,28,0.4),
+    inset 0 1px 0 rgba(255,255,255,0.15) !important;
+  transition: all 0.25s ease !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+.w-full.flex.items-center.justify-center.gap-2.py-2\.5.rounded-xl.bg-red-600:hover,
+[class*="bg-red-600"][class*="rounded-xl"]:hover {
+  background: linear-gradient(135deg, #dc2626 0%, #f87171 60%, #ef4444 100%) !important;
+  box-shadow:
+    0 0 0 1px rgba(248,113,113,0.5),
+    0 6px 30px rgba(239,68,68,0.55),
+    inset 0 1px 0 rgba(255,255,255,0.2) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Secondary button — Access Game */
+.w-full.flex.items-center.justify-center.gap-2.py-2\.5.rounded-xl.border.border-border.bg-secondary {
+  background: rgba(185,28,28,0.08) !important;
+  border: 1px solid rgba(239,68,68,0.22) !important;
+  border-radius: 0.9rem !important;
+  font-weight: 600 !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3) !important;
+  transition: all 0.25s ease !important;
+}
+.w-full.flex.items-center.justify-center.gap-2.py-2\.5.rounded-xl.border.border-border.bg-secondary:hover {
+  background: rgba(239,68,68,0.14) !important;
+  border-color: rgba(239,68,68,0.4) !important;
+  box-shadow:
+    0 0 0 1px rgba(239,68,68,0.12),
+    0 4px 20px rgba(239,68,68,0.15),
+    0 2px 12px rgba(0,0,0,0.3) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Disabled */
+.cursor-not-allowed[class*="rounded-xl"] {
+  background: rgba(185,28,28,0.04) !important;
+  border-color: rgba(239,68,68,0.08) !important;
+  box-shadow: none !important;
+}
+
+/* ── 12. Lang/loading overlay ──────────────────────────────── */
+.fixed.inset-0.z-50.flex.items-center.justify-center.bg-background {
+  background: linear-gradient(180deg, #130404 0%, #1c0606 100%) !important;
+  backdrop-filter: blur(30px) !important;
+}
+
+/* ── 13. Scrollbar ─────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; background: #130404; }
+::-webkit-scrollbar-track { background: #130404; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #b91c1c, #ef4444);
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover { background: #f87171; }
+
+/* ── 14. Selection ─────────────────────────────────────────── */
+::selection {
+  background: rgba(239,68,68,0.35);
+  color: #fff;
+}
+
+/* ── 15. Warning toast ─────────────────────────────────────── */
+#rc-token-warning {
+  background: linear-gradient(135deg, #2a0808, #3d0c0c) !important;
+  border-color: rgba(239,68,68,0.4) !important;
+  color: #fca5a5 !important;
+  box-shadow: 0 8px 32px rgba(185,28,28,0.3) !important;
+}
+
+/* ── 16. Focus rings ───────────────────────────────────────── */
+*:focus-visible {
+  outline: 2px solid rgba(239,68,68,0.6) !important;
+  outline-offset: 2px !important;
+}
+
+/* ── 17. Hide access token UI ──────────────────────────────── */
+[data-testid="button-generate-token"] {
+  display: none !important;
+}
+
+/* ── 18. Nick gate overlay ─────────────────────────────────── */
+#rc-nick-gate {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(220,38,38,0.22) 0%, transparent 70%),
+    #130404;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Outfit', 'Inter', sans-serif;
+}
+
+#rc-nick-gate.rc-hidden {
+  display: none;
+}
+
+#rc-nick-box {
+  background: linear-gradient(180deg, rgba(32,6,6,0.98) 0%, rgba(22,4,4,0.98) 100%);
+  border: 1px solid rgba(239,68,68,0.25);
+  border-radius: 1.5rem;
+  padding: 2.5rem 2rem;
+  width: 100%;
+  max-width: 380px;
+  box-shadow:
+    0 0 0 1px rgba(239,68,68,0.08),
+    0 40px 80px rgba(0,0,0,0.8),
+    0 0 100px rgba(185,28,28,0.12);
+  text-align: center;
+}
+
+#rc-nick-box::before {
+  content: '';
+  display: block;
+  width: 3.5rem;
+  height: 3.5rem;
+  margin: 0 auto 1.2rem;
+  background: linear-gradient(135deg, #b91c1c 0%, #ef4444 100%);
+  border-radius: 1rem;
+  box-shadow: 0 0 32px rgba(239,68,68,0.5);
+}
+
+#rc-nick-box h2 {
+  color: #fff !important;
+  font-size: 1.4rem !important;
+  margin: 0 0 0.4rem !important;
+  -webkit-text-fill-color: #fff !important;
+  background: none !important;
+}
+
+#rc-nick-box p {
+  color: rgba(252,165,165,0.7);
+  font-size: 0.85rem;
+  margin: 0 0 1.4rem;
+}
+
+#rc-nick-input {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(239,68,68,0.3);
+  background: rgba(185,28,28,0.08);
+  color: #fff;
+  font-size: 0.95rem;
+  font-family: 'Outfit', sans-serif;
+  outline: none;
+  margin-bottom: 0.75rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+#rc-nick-input::placeholder {
+  color: rgba(252,165,165,0.35);
+}
+
+#rc-nick-input:focus {
+  border-color: rgba(239,68,68,0.6);
+  box-shadow: 0 0 0 3px rgba(239,68,68,0.12);
+}
+
+#rc-nick-error {
+  color: #fca5a5;
+  font-size: 0.78rem;
+  margin-bottom: 0.6rem;
+  min-height: 1rem;
+}
+
+#rc-nick-btn {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 0.85rem;
+  border: none;
+  background: linear-gradient(135deg, #b91c1c 0%, #ef4444 60%, #dc2626 100%);
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  font-family: 'Outfit', sans-serif;
+  cursor: pointer;
+  box-shadow:
+    0 0 0 1px rgba(239,68,68,0.3),
+    0 4px 20px rgba(185,28,28,0.4);
+  transition: all 0.2s ease;
+  letter-spacing: 0.02em;
+}
+
+#rc-nick-btn:hover {
+  background: linear-gradient(135deg, #dc2626 0%, #f87171 60%, #ef4444 100%);
+  box-shadow:
+    0 0 0 1px rgba(248,113,113,0.5),
+    0 6px 24px rgba(239,68,68,0.5);
+  transform: translateY(-1px);
+}
+
+#rc-nick-btn:active {
+  transform: translateY(0);
+}
+
+/* ── 19. Custom nav links ──────────────────────────────────── */
+#rc-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-left: auto;
+}
+
+#rc-nav-links a {
+  color: rgba(252,165,165,0.75);
+  font-size: 0.82rem;
+  font-weight: 600;
+  font-family: 'Outfit', sans-serif;
+  text-decoration: none;
+  padding: 0.35rem 0.85rem;
+  border-radius: 0.6rem;
+  transition: all 0.2s ease;
+  letter-spacing: 0.01em;
+}
+
+#rc-nav-links a:hover {
+  color: #fff;
+  background: rgba(239,68,68,0.12);
+}
+
+#rc-nav-links a.active {
+  color: #fff;
+  background: rgba(239,68,68,0.15);
+  border: 1px solid rgba(239,68,68,0.25);
+}
+
+/* Help panel */
+#rc-help-panel {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 99998;
+  background: rgba(19,4,4,0.82);
+  backdrop-filter: blur(12px);
+  align-items: center;
+  justify-content: center;
+  font-family: 'Outfit', sans-serif;
+}
+
+#rc-help-panel.open {
+  display: flex;
+}
+
+#rc-help-box {
+  background: linear-gradient(180deg, rgba(32,6,6,0.98) 0%, rgba(22,4,4,0.98) 100%);
+  border: 1px solid rgba(239,68,68,0.2);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.8);
+}
+
+#rc-help-box h3 {
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 800;
+  margin: 0 0 1rem;
+  -webkit-text-fill-color: #fff !important;
+  background: none !important;
+}
+
+#rc-help-box ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+#rc-help-box ul li {
+  color: rgba(252,165,165,0.8);
+  font-size: 0.88rem;
+  padding: 0.6rem 0.8rem;
+  background: rgba(185,28,28,0.07);
+  border: 1px solid rgba(239,68,68,0.1);
+  border-radius: 0.6rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+#rc-help-box ul li::before {
+  content: '→';
+  color: #ef4444;
+  flex-shrink: 0;
+}
+
+#rc-help-close {
+  width: 100%;
+  padding: 0.65rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(239,68,68,0.25);
+  background: rgba(185,28,28,0.1);
+  color: rgba(252,165,165,0.9);
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-family: 'Outfit', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+#rc-help-close:hover {
+  background: rgba(239,68,68,0.18);
+  color: #fff;
+}
